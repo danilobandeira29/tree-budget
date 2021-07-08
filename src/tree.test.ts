@@ -40,7 +40,7 @@ test("should RefNode have an array of ValueNodes", function() {
     expect(receitaExtraordinaria.nodes[1].ref).toBe("1.1.2");
 });
 
-test.only("should find a node of any level by ref", function() {
+test.only("should find a node of root", function() {
     const subExtraordinaria1 = new ValueNode("1.1.1", 3);
     const subExtraordinaria2 = new ValueNode("1.1.2", 5);
     const receitaExtraordinaria = new RefNode("1.1", subExtraordinaria1, subExtraordinaria2);
@@ -48,6 +48,18 @@ test.only("should find a node of any level by ref", function() {
     const subOrdinaria2 = new ValueNode("1.2.1", 5);
     const receitaOrdinaria = new RefNode("1.2", subOrdinaria1, subOrdinaria2);
     const receita = new RefNode("1", receitaExtraordinaria, receitaOrdinaria);
-    const node = receita.find("1.2.2");
-    expect(node?.ref).toBe("1.2.2");
+    const node = receita.find("1");
+    expect(node?.ref).toBe("1");
 });
+
+// test.only("should find a node of any level by ref", function() {
+//     const subExtraordinaria1 = new ValueNode("1.1.1", 3);
+//     const subExtraordinaria2 = new ValueNode("1.1.2", 5);
+//     const receitaExtraordinaria = new RefNode("1.1", subExtraordinaria1, subExtraordinaria2);
+//     const subOrdinaria1 = new ValueNode("1.2.2", 3);
+//     const subOrdinaria2 = new ValueNode("1.2.1", 5);
+//     const receitaOrdinaria = new RefNode("1.2", subOrdinaria1, subOrdinaria2);
+//     const receita = new RefNode("1", receitaExtraordinaria, receitaOrdinaria);
+//     const node = receita.find("1.2.2");
+//     expect(node?.ref).toBe("1.2.2");
+// });

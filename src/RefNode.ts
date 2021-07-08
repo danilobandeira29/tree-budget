@@ -28,7 +28,6 @@ export default class RefNode extends Nodee {
 
     find(ref: string): Nodee | undefined {
         if(this.ref === ref) return this;
-
     }
 
 }
