@@ -1,10 +1,9 @@
-import ValueNode from "./ValueNode";
-
-export default interface Nodee {
-    left?: Nodee | ValueNode;
-    right?: Nodee | ValueNode;
+export default abstract class Nodee {
     ref: string;
-    nodes: Array<Nodee | ValueNode>;
-    getNodes(): Array<Nodee | ValueNode>;
-    evaluate(): number;
+
+    constructor (ref: string) {
+        this.ref = ref;
+    }
+    
+    abstract evaluate(): number | undefined;
 }
