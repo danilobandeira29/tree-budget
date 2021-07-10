@@ -51,3 +51,15 @@ test("should find a node", function() {
     const node = receita.find("1.2.1");
     expect(node?.ref).toBe("1.2.1");
 });
+
+test("should return undefined if node is not found", function() {
+    const subExtraordinariaLeft = new ValueNode("1.1.1", 3);
+    const subExtraordinariaRight = new ValueNode("1.1.2", 5);
+    const receitaLeft = new RefNode("1.1", subExtraordinariaLeft, subExtraordinariaRight);
+    const subOrdinariaRight = new ValueNode("1.2.2", 3);
+    const subOrdinariaLeft = new ValueNode("1.2.1", 5);
+    const receitaRight = new RefNode("1.2", subOrdinariaLeft, subOrdinariaRight);
+    const receita = new RefNode("1", receitaLeft, receitaRight);
+    const node = receita.find("3")
+    expect(node).toBe(undefined);
+});
