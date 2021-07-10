@@ -7,7 +7,7 @@ export default class RefNode extends Nodee {
     value: number | undefined;
     nodes: Array<Nodee>;
 
-    constructor(ref: string, left?: RefNode | ValueNode, right?:RefNode | ValueNode) {
+    constructor(ref: string, left?: RefNode | ValueNode, right?: RefNode | ValueNode) {
         super(ref);
         this.left = left;
         this.right = right;
@@ -22,20 +22,13 @@ export default class RefNode extends Nodee {
         return this.left?.evaluate() || this.right?.evaluate();
     }
 
-    getNodes() {
-        return this.nodes;
-    }
-
     find(ref: string): Nodee | undefined {
         if(this.ref === ref) return this;
         if(this.left?.ref === ref) return this.left;
-        if(this.left && ref < this.left.ref) {
-            if(this.left instanceof ValueNode) return;
-            return this.left.find(ref);
-        }
         if(this.right?.ref === ref) return this.right;
-        if(this.right instanceof ValueNode) return;
-        return this.right?.find(ref);
+        if(this.left instanceof ValueNode || this.right instanceof ValueNode) return;
+        if(this.left && ref < this.left.ref) return this.left.find(ref);
+        if(this.right && ref > this.right.ref) return this.right.find(ref);
     }
 
 }
