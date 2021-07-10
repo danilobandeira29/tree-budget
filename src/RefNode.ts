@@ -28,6 +28,14 @@ export default class RefNode extends Nodee {
 
     find(ref: string): Nodee | undefined {
         if(this.ref === ref) return this;
+        if(this.left?.ref === ref) return this.left;
+        if(this.left && ref < this.left.ref) {
+            if(this.left instanceof ValueNode) return;
+            return this.left.find(ref);
+        }
+        if(this.right?.ref === ref) return this.right;
+        if(this.right instanceof ValueNode) return;
+        return this.right?.find(ref);
     }
 
 }
